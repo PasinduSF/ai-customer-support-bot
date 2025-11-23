@@ -152,7 +152,7 @@ const NovaChatBot = () => {
               ) : (
                 <div className="bg-white/20 p-1 rounded-xl backdrop-blur-sm">
                   <img
-                    src="https://res.cloudinary.com/djqdqg1ph/image/upload/v1763913239/ChatGPT_Image_Nov_23_2025_09_22_15_PM_ixhfrb.png"
+                    src="https://res.cloudinary.com/djqdqg1ph/image/upload/v1763913817/Untitled_design_2_quoysl.png"
                     alt="Nova AI Logo"
                     className="w-10 h-10"
                   />

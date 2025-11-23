@@ -2,7 +2,11 @@
 
 ### Scenario 03 Implementation – Level 6 Mini Project
 
-![Nova AI Logo](https://res.cloudinary.com/djqdqg1ph/image/upload/v1763913367/ChatGPT_Image_Nov_23_2025_09_25_40_PM_avkhxy.png)
+<img 
+  src="https://res.cloudinary.com/djqdqg1ph/image/upload/v1763913817/Untitled_design_2_quoysl.png" 
+  width="200" 
+  height="200"
+/>
 
 An intelligent, interactive customer support agent powered by **Google Gemini AI** for the module **EEX7340 – AI Techniques (2025)**.
 
