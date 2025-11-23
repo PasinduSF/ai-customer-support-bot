@@ -256,7 +256,7 @@ const NovaChatBot = () => {
                     <button
                       key={chip.label}
                       onClick={() => handleSend(chip.text)}
-                      className="whitespace-nowrap px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs font-medium text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-200 transition-colors shrink-0">
+                      className="cursor-pointer whitespace-nowrap px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs font-medium text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-200 transition-colors shrink-0">
                       {chip.label}
                     </button>
                   ))}
