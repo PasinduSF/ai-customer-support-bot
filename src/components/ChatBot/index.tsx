@@ -150,8 +150,12 @@ const NovaChatBot = () => {
                   <ArrowLeft size={20} className="text-white" />
                 </button>
               ) : (
-                <div className="bg-white/20 p-2 rounded-xl backdrop-blur-sm">
-                  <Bot size={24} className="text-white" />
+                <div className="bg-white/20 p-1 rounded-xl backdrop-blur-sm">
+                  <img
+                    src="https://res.cloudinary.com/djqdqg1ph/image/upload/v1763913817/Untitled_design_2_quoysl.png"
+                    alt="Nova AI Logo"
+                    className="w-10 h-10"
+                  />
                 </div>
               )}
 
@@ -256,7 +260,7 @@ const NovaChatBot = () => {
                     <button
                       key={chip.label}
                       onClick={() => handleSend(chip.text)}
-                      className="whitespace-nowrap px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs font-medium text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-200 transition-colors shrink-0">
+                      className="cursor-pointer whitespace-nowrap px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs font-medium text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-200 transition-colors shrink-0">
                       {chip.label}
                     </button>
                   ))}
