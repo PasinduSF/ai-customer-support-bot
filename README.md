@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nova AI – E-Commerce Customer Support Chatbot 🤖🛍️
+
+### Scenario 03 Implementation – Level 6 Mini Project
+
+An intelligent, interactive customer support agent powered by **Google Gemini AI** for the module **EEX7340 – AI Techniques (2025)**.
+
+## Overview
+
+Nova AI is a smart virtual assistant designed for an e-commerce platform named **“TechStyle Store.”**  
+It uses a **Large Language Model (LLM)** to understand natural language, context, and intent.  
+The chatbot renders **interactive UI components** such as product cards, order trackers, and policy cards.
+
+## Key Features
+
+- 🧠 **Natural Language Understanding (NLU)** using Google Gemini
+- 🎙️ **Voice Interaction** with Speech-to-Text
+- 📦 **Order Tracking Stepper** (Ordered → Processing → Shipped → Delivered)
+- 🛍️ **Smart Recommendations** with entity normalization
+- 🎨 **Interactive UI Components**
+- 🔄 **Fallback Logic** for product search
+
+## Tech Stack
+
+- **Next.js 14 (App Router)**
+- **React + TypeScript**
+- **Tailwind CSS**
+- **Google Gemini API**
+- **Lucide React Icons**
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/nova-ai-commerce.git
+cd nova-ai-commerce
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure Environment Variables
+
+Create `.env.local`:
+
+```
+GEMINI_API_KEY=your_actual_api_key_here
+```
+
+### 4. Start Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit: http://localhost:3000/
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/
+│   ├── api/chat/
+│   ├── components/
+│   └── page.tsx
+├── constants/
+├── enums/
+└── types/
+```
 
-## Learn More
+## How It Works
 
-To learn more about Next.js, take a look at the following resources:
+1. User inputs text/voice
+2. Gemini processes with structured JSON response
+3. Backend logic queries mock database
+4. Frontend renders components (Stepper, Product Cards, etc.)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Demo Highlights
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- “I need running shoes” → Footwear recommendations
+- “Check order ORD-123-ABC” → Shipping progress bar
+- “Return policy?” → Visual return policy card
 
-## Deploy on Vercel
+## Academic Info
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Created for **EEX7340 – AI Techniques Module (2025)**  
+Level 6 Mini Project
