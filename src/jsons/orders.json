@@ -1,0 +1,34 @@
+[
+  {
+    "orderId": "ORD-123-ABC",
+    "customerId": "USER-001",
+    "status": "Shipped",
+    "items": ["P-101"],
+    "orderDate": "2023-11-10",
+    "deliveryEst": "2023-11-15"
+  },
+  {
+    "orderId": "ORD-456-DEF",
+    "customerId": "USER-001",
+    "status": "Processing",
+    "items": ["P-401", "P-402"],
+    "orderDate": "2023-11-12",
+    "deliveryEst": "2023-11-18"
+  },
+  {
+    "orderId": "ORD-789-GHI",
+    "customerId": "USER-002",
+    "status": "Delivered",
+    "items": ["P-201"],
+    "orderDate": "2023-10-25",
+    "deliveryEst": "2023-10-30"
+  },
+  {
+    "orderId": "ORD-999-XYZ",
+    "customerId": "USER-003",
+    "status": "Cancelled",
+    "items": ["P-302"],
+    "orderDate": "2023-11-01",
+    "deliveryEst": "N/A"
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "productId": "P-101",
+    "name": "Sony WH-1000XM5 Headphones",
+    "category": "electronics",
+    "price": 348.0,
+    "stock": 12,
+    "description": "Noise canceling wireless headphones."
+  },
+  {
+    "productId": "P-102",
+    "name": "Apple MacBook Air M2",
+    "category": "electronics",
+    "price": 999.0,
+    "stock": 5,
+    "description": "13-inch laptop with M2 chip."
+  },
+  {
+    "productId": "P-103",
+    "name": "Samsung Galaxy S23",
+    "category": "electronics",
+    "price": 799.0,
+    "stock": 8,
+    "description": "Android smartphone with high-res camera."
+  },
+  {
+    "productId": "P-201",
+    "name": "Nike Air Zoom Pegasus 40",
+    "category": "footwear",
+    "price": 130.0,
+    "stock": 15,
+    "description": "Reliable daily running shoes."
+  },
+  {
+    "productId": "P-301",
+    "name": "Levi's 501 Original Jeans",
+    "category": "clothing",
+    "price": 79.5,
+    "stock": 25,
+    "description": "Classic straight leg denim jeans."
+  },
+  {
+    "productId": "P-401",
+    "name": "Yoga Mat Premium 6mm",
+    "category": "fitness",
+    "price": 29.99,
+    "stock": 50,
+    "description": "Non-slip exercise mat for home workouts."
+  }
+]
