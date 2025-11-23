@@ -32,8 +32,8 @@ The chatbot renders **interactive UI components** such as product cards, order t
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/nova-ai-commerce.git
-cd nova-ai-commerce
+git https://github.com/PasinduSF/ai-customer-support-bot.git
+cd ai-customer-support-bot
 ```
 
 ### 2. Install Dependencies
