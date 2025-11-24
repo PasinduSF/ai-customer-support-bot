@@ -1,0 +1,3 @@
+const GET_ANALYTICS = "GET_ANALYTICS";
+
+export { GET_ANALYTICS };

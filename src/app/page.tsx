@@ -1,3 +1,4 @@
+"use client";
 import { ShoppingBag, Search, Menu } from "lucide-react";
 import PRODUCTS from "@/jsons/products.json";
 import NovaChatBot from "@/components/ChatBot";

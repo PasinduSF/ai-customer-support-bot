@@ -4,6 +4,7 @@ const RECOMMEND_PRODUCT = "recommend_product";
 const GREETING = "greeting";
 const LIST_CATEGORIES = "list_categories";
 const LIST_ORDERS = "list_orders";
+const TRIGGER_WELCOME = "trigger_welcome";
 
 export {
   CHECK_ORDER,
@@ -12,4 +13,5 @@ export {
   GREETING,
   LIST_CATEGORIES,
   LIST_ORDERS,
+  TRIGGER_WELCOME,
 };

@@ -1,7 +1,16 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { X, Send, Sparkles, Bot, ArrowLeft, MicOff, Mic } from "lucide-react";
+import {
+  X,
+  Send,
+  Sparkles,
+  Bot,
+  ArrowLeft,
+  MicOff,
+  Mic,
+  RefreshCcw,
+} from "lucide-react";
 import { AIResType } from "@/enums/ai-res-type.enum";
 import { Message } from "@/types/ai-res.types";
 import { Sender } from "@/enums/sender.enum";
@@ -12,10 +21,11 @@ import { Order } from "@/types/orders.types";
 import OrderStepper from "./OrderStepper";
 import ProductList from "./ProductList";
 import FloatingButton from "./FloatingButton";
-import SelectedProductView from "./SelectedProductView";
 import ReturnPolicyCard from "./ReturnPolicyCard";
 import OrderList from "./OrderList";
 import TypingIndicator from "../TypingIndicator";
+import Mascot from "../Mascot";
+import SelectedProductView from "./SelectedProductView";
 
 const SUGGESTIONS = [
   { label: "📦 Track Order", text: "Where is my order?" },
@@ -23,6 +33,8 @@ const SUGGESTIONS = [
   { label: "🎧 Gadgets", text: "Recommend electronics" },
   { label: "🔄 Returns", text: "What is your return policy?" },
 ];
+
+const SYSTEM_TRIGGER_WELCOME = "SYSTEM_TRIGGER_WELCOME";
 
 const NovaChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,11 +50,24 @@ const NovaChatBot = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isListening, setIsListening] = useState<boolean>(false);
+  const [hasGreeted, setHasGreeted] = useState<boolean>(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [isLogoLoading, setIsLogoLoading] = useState(true);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
+  useEffect(() => {
+    if (!hasGreeted) {
+      const timer = setTimeout(() => {
+        setIsOpen(true);
+        handleSend(SYSTEM_TRIGGER_WELCOME);
+        setHasGreeted(true);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [hasGreeted]);
 
   useEffect(() => {
     if (isOpen) {
@@ -56,10 +81,14 @@ const NovaChatBot = () => {
     if (!userText.trim()) return;
 
     setInput("");
-    setMessages((prev) => [
-      ...prev,
-      { id: Date.now(), sender: Sender.USER, text: userText },
-    ]);
+    if (userText !== SYSTEM_TRIGGER_WELCOME) {
+      setInput("");
+      setMessages((prev) => [
+        ...prev,
+        { id: Date.now(), sender: Sender.USER, text: userText },
+      ]);
+    }
+
     setIsLoading(true);
 
     try {
@@ -130,6 +159,12 @@ const NovaChatBot = () => {
     recognition.start();
   };
 
+  const handleClearChat = () => {
+    setMessages([]);
+    setSelectedProduct(null);
+    handleSend("SYSTEM_TRIGGER_WELCOME");
+  };
+
   return (
     <div
       className={`fixed z-50 flex flex-col items-end font-sans transition-all duration-300 ${
@@ -137,6 +172,8 @@ const NovaChatBot = () => {
           ? "inset-0 sm:inset-auto sm:bottom-6 sm:right-6"
           : "bottom-6 right-6"
       }`}>
+      {!isOpen && <Mascot onClick={() => setIsOpen(true)} />}
+
       {isOpen && (
         <div className="w-full h-full sm:w-[400px] md:w-[450px] sm:h-[600px] bg-slate-50 sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300 ring-1 ring-black/5 relative sm:mb-4">
           <div className="bg-linear-to-r from-violet-600 to-indigo-600 p-4 sm:p-5 text-white flex justify-between items-center shadow-md relative overflow-hidden shrink-0 z-20">
@@ -154,7 +191,10 @@ const NovaChatBot = () => {
                   <img
                     src="https://res.cloudinary.com/djqdqg1ph/image/upload/v1763913817/Untitled_design_2_quoysl.png"
                     alt="Nova AI Logo"
-                    className="w-10 h-10"
+                    className={`w-10 h-10 object-cover transition-opacity duration-500 ${
+                      isLogoLoading ? "opacity-0" : "opacity-100"
+                    }`}
+                    onLoad={() => setIsLogoLoading(false)}
                   />
                 </div>
               )}
@@ -172,11 +212,20 @@ const NovaChatBot = () => {
               </div>
             </div>
 
-            <button
-              onClick={() => setIsOpen(false)}
-              className="hover:bg-white/20 p-2 rounded-full transition-colors relative z-10 cursor-pointer">
-              <X size={20} />
-            </button>
+            <div className="flex items-center gap-2 relative z-10">
+              <button
+                onClick={handleClearChat}
+                className="hover:bg-white/20 p-2 rounded-full transition-colors cursor-pointer"
+                title="Reset Chat">
+                <RefreshCcw size={18} />
+              </button>
+
+              <button
+                onClick={() => setIsOpen(false)}
+                className="hover:bg-white/20 p-2 rounded-full transition-colors cursor-pointer">
+                <X size={20} />
+              </button>
+            </div>
           </div>
 
           {selectedProduct ? (
