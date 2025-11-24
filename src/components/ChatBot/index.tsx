@@ -1,7 +1,16 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { X, Send, Sparkles, Bot, ArrowLeft, MicOff, Mic } from "lucide-react";
+import {
+  X,
+  Send,
+  Sparkles,
+  Bot,
+  ArrowLeft,
+  MicOff,
+  Mic,
+  RefreshCcw,
+} from "lucide-react";
 import { AIResType } from "@/enums/ai-res-type.enum";
 import { Message } from "@/types/ai-res.types";
 import { Sender } from "@/enums/sender.enum";
@@ -43,6 +52,7 @@ const NovaChatBot = () => {
   const [isListening, setIsListening] = useState<boolean>(false);
   const [hasGreeted, setHasGreeted] = useState<boolean>(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [isLogoLoading, setIsLogoLoading] = useState(true);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -149,6 +159,12 @@ const NovaChatBot = () => {
     recognition.start();
   };
 
+  const handleClearChat = () => {
+    setMessages([]);
+    setSelectedProduct(null);
+    handleSend("SYSTEM_TRIGGER_WELCOME");
+  };
+
   return (
     <div
       className={`fixed z-50 flex flex-col items-end font-sans transition-all duration-300 ${
@@ -175,7 +191,10 @@ const NovaChatBot = () => {
                   <img
                     src="https://res.cloudinary.com/djqdqg1ph/image/upload/v1763913817/Untitled_design_2_quoysl.png"
                     alt="Nova AI Logo"
-                    className="w-10 h-10"
+                    className={`w-10 h-10 object-cover transition-opacity duration-500 ${
+                      isLogoLoading ? "opacity-0" : "opacity-100"
+                    }`}
+                    onLoad={() => setIsLogoLoading(false)}
                   />
                 </div>
               )}
@@ -193,11 +212,20 @@ const NovaChatBot = () => {
               </div>
             </div>
 
-            <button
-              onClick={() => setIsOpen(false)}
-              className="hover:bg-white/20 p-2 rounded-full transition-colors relative z-10 cursor-pointer">
-              <X size={20} />
-            </button>
+            <div className="flex items-center gap-2 relative z-10">
+              <button
+                onClick={handleClearChat}
+                className="hover:bg-white/20 p-2 rounded-full transition-colors cursor-pointer"
+                title="Reset Chat">
+                <RefreshCcw size={18} />
+              </button>
+
+              <button
+                onClick={() => setIsOpen(false)}
+                className="hover:bg-white/20 p-2 rounded-full transition-colors cursor-pointer">
+                <X size={20} />
+              </button>
+            </div>
           </div>
 
           {selectedProduct ? (
