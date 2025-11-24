@@ -12,9 +12,12 @@ import {
   LIST_ORDERS,
   RECOMMEND_PRODUCT,
   RETURN,
+  TRIGGER_WELCOME,
 } from "@/constants/ai-result-intent";
 
 const API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+
+let ANALYTICS_LOG: { intent: string; term: string; timestamp: string }[] = [];
 
 export async function POST(request: Request) {
   try {
@@ -25,6 +28,11 @@ export async function POST(request: Request) {
       );
     }
     const { message } = await request.json();
+
+    if (message === "GET_ANALYTICS") {
+      return NextResponse.json({ analytics: ANALYTICS_LOG });
+    }
+
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${API_KEY}`,
       {
@@ -47,27 +55,75 @@ export async function POST(request: Request) {
 
     const aiResult = JSON.parse(data.candidates[0].content.parts[0].text);
 
+    const intent = aiResult.intent ? aiResult.intent.trim() : "unknown";
+    const sentiment = aiResult.sentiment || "neutral";
+    const reasoning = aiResult.reasoning || "";
+
+    if (intent !== TRIGGER_WELCOME) {
+      ANALYTICS_LOG.push({
+        intent: intent,
+        term:
+          aiResult.entities.original_term ||
+          aiResult.entities.category ||
+          "N/A",
+        timestamp: new Date().toISOString(),
+      });
+    }
+
     let botReply = "";
     let responseType = AIResType.TEXT;
     let responseData = null;
 
+    let prefix = "";
+    if (sentiment === "negative") {
+      prefix =
+        "I'm truly sorry to hear that you're upset. Let me help you sort this out immediately. ";
+    }
+
     switch (aiResult.intent) {
+      case TRIGGER_WELCOME:
+        const vibes = [
+          {
+            cat: ProdCategory.ELECTRONICS,
+            msg: "⚡ Power up your day! I've found some high-performance tech for you.",
+          },
+          {
+            cat: ProdCategory.FITNESS,
+            msg: "💪 Feeling energetic? Check out these essentials to crush your goals.",
+          },
+          {
+            cat: ProdCategory.FOOTWEAR,
+            msg: "👟 Step into comfort. Here are the top trending kicks right now.",
+          },
+        ];
+        const randomVibe = vibes[Math.floor(Math.random() * vibes.length)];
+        const welcomeMatches = PRODUCTS.filter(
+          (p) => p.category === randomVibe.cat
+        ).slice(0, 2);
+
+        botReply = `Welcome back! ${randomVibe.msg}`;
+        responseType = AIResType.PRODUCT_LIST;
+        responseData = welcomeMatches as unknown as Product[];
+        break;
       case CHECK_ORDER:
-        const id = aiResult.entities.order_id;
+        let id = aiResult.entities.order_id;
+        if (id === "null" || id === "undefined") {
+          id = null;
+        }
+
         if (id) {
           const order = ORDERS.find((o) =>
             o.orderId.toLowerCase().includes(id.toLowerCase())
           );
           if (order) {
-            botReply =
-              "I found your order details. Here is the current status:";
+            botReply = `${prefix}I found your order details. Here is the current status:`;
             responseType = AIResType.ORDER_STATUS;
             responseData = order;
           } else {
-            botReply = `I looked for order "${id}" but couldn't find it. Please double-check the ID.`;
+            botReply = `${prefix}I looked for order "${id}" but couldn't find it. Please double-check the ID.`;
           }
         } else {
-          botReply = "I can check that for you. What is your Order ID?";
+          botReply = `${prefix}I can check that for you. What is your Order ID?`;
         }
         break;
 
@@ -76,17 +132,16 @@ export async function POST(request: Request) {
         const userOrders = ORDERS.filter((o) => o.customerId === currentUserId);
 
         if (userOrders.length > 0) {
-          botReply = `I found ${userOrders.length} recent orders in your history:`;
+          botReply = `${prefix}I found ${userOrders.length} recent orders in your history:`;
           responseType = AIResType.ORDER_LIST;
           responseData = userOrders;
         } else {
-          botReply = "I couldn't find any past orders for your account.";
+          botReply = `${prefix}I couldn't find any past orders for your account.`;
         }
         break;
 
       case LIST_CATEGORIES:
-        botReply =
-          "We have a great selection! Here are our available categories:";
+        botReply = `${prefix}We have a great selection! Here are our available categories:`;
         responseType = AIResType.CATEGORY_LIST;
         const uniqueCategories = Array.from(
           new Set(PRODUCTS.map((p) => p.category))
@@ -95,8 +150,7 @@ export async function POST(request: Request) {
         break;
 
       case RETURN:
-        botReply =
-          "We want you to be happy with your purchase. Here are the details of our policy:";
+        botReply = `${prefix}We want you to be happy with your purchase. Here are the details of our policy:`;
         responseType = AIResType.RETURN_POLICY;
         break;
 
@@ -123,26 +177,25 @@ export async function POST(request: Request) {
         }
 
         if (matches.length > 0) {
-          botReply = `Here are our top picks for ${category || searchTerm}:`;
+          botReply = `${prefix}Here are our top picks for ${
+            category || searchTerm
+          }. ${reasoning}`;
           responseType = AIResType.PRODUCT_LIST;
           responseData = matches;
         } else {
-          botReply =
-            "I couldn't narrow it down to a specific category, but here are our Best Sellers that everyone loves:";
+          botReply = `${prefix}I couldn't narrow it down to a specific category, but here are our Best Sellers that everyone loves:`;
           responseType = AIResType.PRODUCT_LIST;
           responseData = PRODUCTS.slice(0, 3);
         }
         break;
 
       case GREETING:
-        botReply =
-          "Hi there! I'm Nova. I can help you find products (like 'gadgets' or 'sneakers') or check your order status.";
+        botReply = `${prefix}Hi there! I'm Nova. I can help you find products (like 'gadgets' or 'sneakers') or check your order status.`;
         break;
 
       default:
         console.log("Unmatched Intent:", aiResult.intent);
-        botReply =
-          "I'm not sure I understand. Try asking for 'electronics', 'running shoes', or 'return policy'.";
+        botReply = `${prefix}I'm not sure I understand. Try asking for 'electronics', 'running shoes', or 'return policy'.`;
     }
 
     return NextResponse.json({

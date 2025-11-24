@@ -5,5 +5,7 @@ enum AIResType {
   CATEGORY_LIST = "category_list",
   ORDER_LIST = "order_list",
   RETURN_POLICY = "return_policy",
+  TRIGGER_WELCOME = "trigger_welcome",
 }
+
 export { AIResType };
