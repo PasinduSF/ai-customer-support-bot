@@ -14,6 +14,8 @@ import {
   RETURN,
   TRIGGER_WELCOME,
 } from "@/constants/ai-result-intent";
+import { fetchWithRetry } from "@/libs/utils/fetchWithRetry.util";
+import { normalizeId } from "@/libs/utils/helpers.util";
 
 const API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
@@ -32,24 +34,26 @@ export async function POST(request: Request) {
     if (message === "GET_ANALYTICS") {
       return NextResponse.json({ analytics: ANALYTICS_LOG });
     }
-
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${API_KEY}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: message }] }],
-          systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-          generationConfig: { responseMimeType: "application/json" },
-        }),
-      }
-    );
-    const data = await response.json();
-    if (!data.candidates || !data.candidates[0]) {
+    let data;
+    try {
+      data = await fetchWithRetry(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${API_KEY}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: message }] }],
+            systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+            generationConfig: { responseMimeType: "application/json" },
+          }),
+        }
+      );
+    } catch (apiError) {
+      console.error("Gemini API completely failed after retries:", apiError);
       return NextResponse.json({
         intent: "error",
-        message: "AI Service unavailable.",
+        message:
+          "I'm having a little trouble connecting to my brain right now. Please try again in a moment! 🧠",
       });
     }
 
@@ -112,8 +116,9 @@ export async function POST(request: Request) {
         }
 
         if (id) {
+          const normalizedInputId = normalizeId(id);
           const order = ORDERS.find((o) =>
-            o.orderId.toLowerCase().includes(id.toLowerCase())
+            normalizeId(o.orderId).includes(normalizedInputId)
           );
           if (order) {
             botReply = `${prefix}I found your order details. Here is the current status:`;
