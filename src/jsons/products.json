@@ -46,5 +46,374 @@
     "price": 29.99,
     "stock": 50,
     "description": "Non-slip exercise mat for home workouts."
+  },
+
+  {
+    "productId": "P-104",
+    "name": "Logitech MX Master 3S Mouse",
+    "category": "electronics",
+    "price": 99.99,
+    "stock": 18,
+    "description": "Advanced ergonomic wireless mouse."
+  },
+  {
+    "productId": "P-105",
+    "name": "Dell UltraSharp 27 Monitor",
+    "category": "electronics",
+    "price": 459.0,
+    "stock": 7,
+    "description": "27-inch QHD IPS display for professionals."
+  },
+  {
+    "productId": "P-106",
+    "name": "Anker Soundcore Life P3",
+    "category": "electronics",
+    "price": 79.99,
+    "stock": 30,
+    "description": "Noise-canceling true wireless earbuds."
+  },
+  {
+    "productId": "P-107",
+    "name": "Canon EOS M50 Mark II",
+    "category": "electronics",
+    "price": 649.99,
+    "stock": 6,
+    "description": "Mirrorless camera for photography enthusiasts."
+  },
+  {
+    "productId": "P-108",
+    "name": "Amazon Echo Dot 5th Gen",
+    "category": "electronics",
+    "price": 49.99,
+    "stock": 40,
+    "description": "Smart speaker with Alexa voice control."
+  },
+  {
+    "productId": "P-109",
+    "name": "Apple iPad 10th Gen",
+    "category": "electronics",
+    "price": 429.0,
+    "stock": 11,
+    "description": "Versatile tablet for work and entertainment."
+  },
+
+  {
+    "productId": "P-202",
+    "name": "Adidas Ultraboost Light",
+    "category": "footwear",
+    "price": 180.0,
+    "stock": 10,
+    "description": "High-performance running shoes."
+  },
+  {
+    "productId": "P-203",
+    "name": "Puma Smash V2 Sneakers",
+    "category": "footwear",
+    "price": 59.99,
+    "stock": 22,
+    "description": "Classic casual everyday sneakers."
+  },
+  {
+    "productId": "P-204",
+    "name": "Timberland Classic Boots",
+    "category": "footwear",
+    "price": 150.0,
+    "stock": 9,
+    "description": "Durable waterproof leather boots."
+  },
+  {
+    "productId": "P-205",
+    "name": "Reebok Nano X3 Training Shoes",
+    "category": "footwear",
+    "price": 140.0,
+    "stock": 14,
+    "description": "Cross-training shoes for gym workouts."
+  },
+
+  {
+    "productId": "P-302",
+    "name": "H&M Cotton T-Shirt",
+    "category": "clothing",
+    "price": 14.99,
+    "stock": 40,
+    "description": "Soft and breathable everyday T-shirt."
+  },
+  {
+    "productId": "P-303",
+    "name": "Zara Linen Summer Shirt",
+    "category": "clothing",
+    "price": 39.9,
+    "stock": 20,
+    "description": "Lightweight linen wear for warm weather."
+  },
+  {
+    "productId": "P-304",
+    "name": "North Face Puffer Jacket",
+    "category": "clothing",
+    "price": 199.0,
+    "stock": 12,
+    "description": "Warm insulated winter jacket."
+  },
+  {
+    "productId": "P-305",
+    "name": "Uniqlo HeatTech Leggings",
+    "category": "clothing",
+    "price": 24.99,
+    "stock": 35,
+    "description": "Thermal leggings for cold weather."
+  },
+  {
+    "productId": "P-306",
+    "name": "Champion Hoodie Classic",
+    "category": "clothing",
+    "price": 55.0,
+    "stock": 16,
+    "description": "Comfortable fleece-lined hoodie."
+  },
+
+  {
+    "productId": "P-402",
+    "name": "Adjustable Dumbbell Set 20kg",
+    "category": "fitness",
+    "price": 89.99,
+    "stock": 18,
+    "description": "Strength training adjustable dumbbells."
+  },
+  {
+    "productId": "P-403",
+    "name": "Resistance Bands Pack",
+    "category": "fitness",
+    "price": 19.99,
+    "stock": 45,
+    "description": "Set of 5 resistance bands for workouts."
+  },
+  {
+    "productId": "P-404",
+    "name": "Fitness Tracker Pro Band",
+    "category": "fitness",
+    "price": 49.99,
+    "stock": 33,
+    "description": "Activity tracking with heart rate monitor."
+  },
+  {
+    "productId": "P-405",
+    "name": "Foam Roller 18-inch",
+    "category": "fitness",
+    "price": 24.5,
+    "stock": 27,
+    "description": "Helps relax muscles and deep tissue massage."
+  },
+  {
+    "productId": "P-406",
+    "name": "Skipping Rope Speed Pro",
+    "category": "fitness",
+    "price": 14.99,
+    "stock": 60,
+    "description": "High-speed rope for cardio workouts."
+  },
+
+  {
+    "productId": "P-501",
+    "name": "Instant Pot Duo 7-in-1",
+    "category": "kitchen",
+    "price": 99.0,
+    "stock": 13,
+    "description": "Multi-function electric pressure cooker."
+  },
+  {
+    "productId": "P-502",
+    "name": "Non-Stick Cookware Set",
+    "category": "kitchen",
+    "price": 79.99,
+    "stock": 20,
+    "description": "Durable 8-piece cooking set."
+  },
+  {
+    "productId": "P-503",
+    "name": "Electric Kettle 1.7L",
+    "category": "kitchen",
+    "price": 28.99,
+    "stock": 35,
+    "description": "Fast boiling stainless steel kettle."
+  },
+  {
+    "productId": "P-504",
+    "name": "Digital Coffee Scale",
+    "category": "kitchen",
+    "price": 32.5,
+    "stock": 15,
+    "description": "Precision scale for coffee brewing."
+  },
+  {
+    "productId": "P-505",
+    "name": "8-inch Chef's Knife",
+    "category": "kitchen",
+    "price": 45.0,
+    "stock": 22,
+    "description": "Professional stainless steel chef knife."
+  },
+
+  {
+    "productId": "P-601",
+    "name": "Aroma Scented Candle Set",
+    "category": "home",
+    "price": 25.0,
+    "stock": 50,
+    "description": "Set of 4 long-lasting scented candles."
+  },
+  {
+    "productId": "P-602",
+    "name": "Memory Foam Pillow",
+    "category": "home",
+    "price": 39.99,
+    "stock": 28,
+    "description": "Ergonomic neck support pillow."
+  },
+  {
+    "productId": "P-603",
+    "name": "Essential Oil Diffuser",
+    "category": "home",
+    "price": 29.0,
+    "stock": 18,
+    "description": "Ultrasonic diffuser with LED lighting."
+  },
+  {
+    "productId": "P-604",
+    "name": "Soft Plush Blanket",
+    "category": "home",
+    "price": 49.99,
+    "stock": 14,
+    "description": "Cozy microfiber throw blanket."
+  },
+  {
+    "productId": "P-605",
+    "name": "LED Desk Lamp",
+    "category": "home",
+    "price": 34.99,
+    "stock": 25,
+    "description": "Adjustable brightness desk lamp."
+  },
+
+  {
+    "productId": "P-701",
+    "name": "Maybelline Fit Me Foundation",
+    "category": "beauty",
+    "price": 12.99,
+    "stock": 40,
+    "description": "Matte liquid foundation for perfect finish."
+  },
+  {
+    "productId": "P-702",
+    "name": "Nivea Soft Moisturizing Cream",
+    "category": "beauty",
+    "price": 8.99,
+    "stock": 55,
+    "description": "Lightweight cream for daily hydration."
+  },
+  {
+    "productId": "P-703",
+    "name": "L'Oreal Paris Shampoo",
+    "category": "beauty",
+    "price": 11.5,
+    "stock": 30,
+    "description": "Keratin-smooth shampoo for shiny hair."
+  },
+  {
+    "productId": "P-704",
+    "name": "Revlon Matte Lipstick",
+    "category": "beauty",
+    "price": 9.99,
+    "stock": 22,
+    "description": "Long-lasting matte finish lipstick."
+  },
+  {
+    "productId": "P-705",
+    "name": "Neutrogena Sunscreen SPF 50",
+    "category": "beauty",
+    "price": 14.99,
+    "stock": 33,
+    "description": "Broad-spectrum UVA/UVB protection."
+  },
+
+  {
+    "productId": "P-801",
+    "name": "The Psychology of Money",
+    "category": "books",
+    "price": 16.99,
+    "stock": 40,
+    "description": "Bestselling finance and mindset book."
+  },
+  {
+    "productId": "P-802",
+    "name": "Atomic Habits",
+    "category": "books",
+    "price": 18.5,
+    "stock": 35,
+    "description": "Guide to building effective habits."
+  },
+  {
+    "productId": "P-803",
+    "name": "Harry Potter & The Sorcerer's Stone",
+    "category": "books",
+    "price": 12.99,
+    "stock": 28,
+    "description": "Fantasy novel by J.K. Rowling."
+  },
+  {
+    "productId": "P-804",
+    "name": "Rich Dad Poor Dad",
+    "category": "books",
+    "price": 14.99,
+    "stock": 32,
+    "description": "Classic book on financial literacy."
+  },
+  {
+    "productId": "P-805",
+    "name": "Deep Work by Cal Newport",
+    "category": "books",
+    "price": 17.99,
+    "stock": 20,
+    "description": "A guide to focused productivity."
+  },
+
+  {
+    "productId": "P-901",
+    "name": "PlayStation 5 Controller",
+    "category": "gaming",
+    "price": 69.99,
+    "stock": 18,
+    "description": "DualSense wireless controller."
+  },
+  {
+    "productId": "P-902",
+    "name": "Xbox Game Pass 3 Month",
+    "category": "gaming",
+    "price": 29.99,
+    "stock": 50,
+    "description": "Subscription for Xbox cloud gaming."
+  },
+  {
+    "productId": "P-903",
+    "name": "Nintendo Switch Case",
+    "category": "gaming",
+    "price": 19.99,
+    "stock": 26,
+    "description": "Protective travel case for Switch."
+  },
+  {
+    "productId": "P-904",
+    "name": "Razer BlackWidow V3 Keyboard",
+    "category": "gaming",
+    "price": 129.0,
+    "stock": 12,
+    "description": "Mechanical keyboard with RGB lighting."
+  },
+  {
+    "productId": "P-905",
+    "name": "Logitech G502 Hero Mouse",
+    "category": "gaming",
+    "price": 49.99,
+    "stock": 20,
+    "description": "High-performance adjustable DPI gaming mouse."
   }
 ]
