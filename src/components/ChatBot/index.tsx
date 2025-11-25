@@ -355,7 +355,7 @@ const NovaChatBot = () => {
 
                   <div className="text-center mt-2">
                     <span className="text-[10px] text-slate-300 font-medium">
-                      Powered by Gemini AI
+                      Powered by Nova AI
                     </span>
                   </div>
                 </div>
