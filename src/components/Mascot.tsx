@@ -20,9 +20,9 @@ const Mascot = ({ onClick }: { onClick: () => void }) => {
         </p>
       </div>
 
-      <div className="mr-6 mt-13">
+      <div className="mr-6 mt-9">
         <iframe
-          src="https://my.spline.design/genkubgreetingrobot-Pk44Zy2QuzGerFV7gPC50iec/"
+          src="https://my.spline.design/genkubgreetingrobot-8g3K01qBKgRUiV2F6kG8RkLx/"
           frameBorder="0"
           width="200%"
           height="200%"></iframe>
