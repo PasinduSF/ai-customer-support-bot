@@ -15,6 +15,7 @@ import {
   TRIGGER_WELCOME,
 } from "@/constants/ai-result-intent";
 import { fetchWithRetry } from "@/libs/utils/fetchWithRetry.util";
+import { normalizeId } from "@/libs/utils/helpers.util";
 
 const API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
@@ -115,8 +116,9 @@ export async function POST(request: Request) {
         }
 
         if (id) {
+          const normalizedInputId = normalizeId(id);
           const order = ORDERS.find((o) =>
-            o.orderId.toLowerCase().includes(id.toLowerCase())
+            normalizeId(o.orderId).includes(normalizedInputId)
           );
           if (order) {
             botReply = `${prefix}I found your order details. Here is the current status:`;

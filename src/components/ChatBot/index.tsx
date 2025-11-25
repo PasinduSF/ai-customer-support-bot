@@ -145,7 +145,7 @@ const NovaChatBot = () => {
       const transcript = event.results[0][0].transcript;
       setInput(transcript);
       setIsListening(false);
-      handleSend();
+      handleSend(transcript);
     };
 
     recognition.onerror = () => {
