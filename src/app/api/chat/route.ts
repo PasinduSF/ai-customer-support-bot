@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
+
+// Importing the Mock Database (JSON files) directly
 import ORDERS from "../../../jsons/orders.json";
 import PRODUCTS from "../../../jsons/products.json";
+
 import { Product } from "@/types/products.types";
 import { ProdCategory } from "@/enums/product-category.enum";
 import { AIResType } from "@/enums/ai-res-type.enum";
@@ -21,9 +24,11 @@ import {
   normalizeId,
 } from "@/libs/utils/helpers.util";
 
+// --- CONFIGURATION ---
 const OPENROUTER_API_KEY = process.env.NEXT_PUBLIC_OPENROUTER_API_KEY;
 const GOOGLE_GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
+// Initialize the OpenAI client
 const openai = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
   apiKey: OPENROUTER_API_KEY,
@@ -48,6 +53,7 @@ export async function POST(request: Request) {
       );
     }
 
+    // Parse the User's Input
     const payload = await request.json();
     const userText = payload.message || payload.text || "";
     const multimodal = {
@@ -66,6 +72,7 @@ export async function POST(request: Request) {
     let rawContent: any = "";
     let usedProvider = "openrouter";
 
+    // Try OpenRouter (Primary Provider)
     if (OPENROUTER_API_KEY) {
       try {
         const completion = await openai.chat.completions.create({
@@ -75,21 +82,13 @@ export async function POST(request: Request) {
           max_tokens: 800,
         });
         rawContent = completion?.choices?.[0]?.message?.content ?? "";
-
-        const headers =
-          (completion as any).response?.headers ?? (completion as any).headers;
-
-        console.log("OpenRouter Rate Limit:", {
-          limit: headers?.get("x-ratelimit-limit"),
-          remaining: headers?.get("x-ratelimit-remaining"),
-          reset: headers?.get("x-ratelimit-reset"),
-        });
       } catch (openErr) {
         console.error("OpenRouter error:", openErr);
         usedProvider = "openrouter_failed";
       }
     }
 
+    // Fallback to Google Gemini Direct API if Attempt 1 failed
     if ((!rawContent || rawContent === "") && GOOGLE_GEMINI_API_KEY) {
       try {
         const googlePayload = {
@@ -117,6 +116,7 @@ export async function POST(request: Request) {
       );
     }
 
+    // Extract the structured JSON from the model's output
     let aiResult: any = {};
     try {
       aiResult = extractJsonFromModelOutput(rawContent) || {
@@ -134,6 +134,7 @@ export async function POST(request: Request) {
       };
     }
 
+    // Clean up extraction results
     const intent = aiResult.intent
       ? aiResult.intent.trim()
       : aiResult.intent || "unknown";
@@ -151,6 +152,7 @@ export async function POST(request: Request) {
       });
     }
 
+    // Generate Bot Response based on Intent
     let botReply = "";
     let responseType = AIResType.TEXT;
     let responseData: any = null;
